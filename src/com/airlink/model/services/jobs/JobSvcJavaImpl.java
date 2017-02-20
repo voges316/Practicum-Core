@@ -79,6 +79,11 @@ public class JobSvcJavaImpl implements IJobSvc {
 		// Removing job from the list, so return actual object, not a copy
 		return jobs.remove(id);
 	}
+	
+	@Override
+	public Job deleteJob(Job job) {
+		return deleteJob(job.getId());
+	}
 
 	@Override
 	public List<Job> getJobs() {

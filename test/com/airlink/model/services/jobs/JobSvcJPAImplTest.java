@@ -10,7 +10,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.airlink.model.domain.Employee;
 import com.airlink.model.domain.Job;
+import com.airlink.model.services.employees.EmployeeSvcJPAImpl;
 
 public class JobSvcJPAImplTest {
 	
@@ -86,12 +88,125 @@ public class JobSvcJPAImplTest {
 
 	@Test
 	public void testAddEmployee() {
-		fail("Not yet implemented");
+		EmployeeSvcJPAImpl empSvc = new EmployeeSvcJPAImpl(); 
+		Employee homer = new Employee("Homer", "Simpson", "homer@duff.com", "12345");
+		homer = empSvc.createEmployee(homer);
+		
+		assertTrue("homer shouldn't have any jobs", 
+				homer.getJobs().size() == 0);
+		assertTrue("snacko shouldn't have any employees", snacko.getEmployees().size() == 0);
+		
+		snacko = svc.addEmployee(snacko, homer);
+		homer = empSvc.getEmployee(homer.getId());
+		
+		assertTrue("homer should be assigned to snacko job", homer.getJobs().size() == 1);
+		assertTrue("snacko should have homer as an employee", snacko.getEmployees().size() == 1);
+		
+		empSvc.deleteEmployee(homer.getId());
+		empSvc.shutdown();
 	}
 
 	@Test
 	public void testRemoveEmployee() {
-		fail("Not yet implemented");
+		EmployeeSvcJPAImpl empSvc = new EmployeeSvcJPAImpl(); 
+		Employee homer = new Employee("Homer", "Simpson", "homer@duff.com", "12345");
+		homer = empSvc.createEmployee(homer);
+		
+		snacko = svc.addEmployee(snacko, homer);
+		homer = empSvc.getEmployee(homer.getId());
+		
+		assertTrue("homer should be assigned to snacko job", homer.getJobs().size() == 1);
+		assertTrue("snacko should have homer as an employee", snacko.getEmployees().size() == 1);
+		
+		snacko = svc.removeEmployee(snacko, homer);
+		homer = empSvc.getEmployee(homer.getId());
+		
+		assertTrue("homer shouldn't have any jobs", 
+				homer.getJobs().size() == 0);
+		assertTrue("snacko shouldn't have any employees", snacko.getEmployees().size() == 0);
+		
+		empSvc.deleteEmployee(homer.getId());
+		empSvc.shutdown();
 	}
 
+	@Test
+	public void testDeleteEmployeeAssignedToJob() {
+		EmployeeSvcJPAImpl empSvc = new EmployeeSvcJPAImpl(); 
+		Employee homer = new Employee("Homer", "Simpson", "homer@duff.com", "12345");
+		homer = empSvc.createEmployee(homer);
+		
+		snacko = svc.addEmployee(snacko, homer);
+		homer = empSvc.getEmployee(homer.getId());
+		
+//		System.out.println("===========Before===========");
+//		System.out.println(homer);
+//		for (Job j : homer.getJobs()) {
+//			System.out.println("\t" + j);
+//		}
+//		
+//		System.out.println(snacko);
+//		for (Employee e : snacko.getEmployees()) {
+//			System.out.println("\t" + e);
+//		}
+		
+		assertTrue("homer should be assigned to snacko job", homer.getJobs().size() == 1);
+		assertTrue("snacko should have homer as an employee", snacko.getEmployees().size() == 1);
+		
+		// Now delete the employee
+		homer = empSvc.deleteEmployee(homer.getId());
+		assertTrue("homer shouldn't have any jobs", 
+				homer.getJobs().size() == 0);
+		assertTrue("snacko shouldn't have any employees", snacko.getEmployees().size() == 0);
+		
+//		System.out.println("===========After===========");
+//		System.out.println(f);
+//		for (Job j : f.getJobs()) {
+//			System.out.println("\t" + j);
+//		}
+//		
+//		System.out.println(snacko);
+//		for (Employee e : snacko.getEmployees()) {
+//			System.out.println("\t" + e);
+//		}
+		
+		empSvc.shutdown();
+	}
+	
+	@Test
+	public void testDeleteJobContainingEmployees() {
+		EmployeeSvcJPAImpl empSvc = new EmployeeSvcJPAImpl(); 
+		Employee homer = new Employee("Homer", "Simpson", "homer@duff.com", "12345");
+		homer = empSvc.createEmployee(homer);
+		
+		snacko = svc.addEmployee(snacko, homer);
+		homer = empSvc.getEmployee(homer.getId());
+		
+		System.out.println("===========Before===========");
+		System.out.println(homer);
+		for (Job j : homer.getJobs()) {
+			System.out.println("\t" + j);
+		}
+		
+		System.out.println(snacko);
+		for (Employee e : snacko.getEmployees()) {
+			System.out.println("\t" + e);
+		}
+		
+		snacko = svc.deleteJob(snacko.getId());
+		homer = empSvc.getEmployee(homer.getId());
+		
+		System.out.println("===========After===========");
+		System.out.println(homer);
+		for (Job j : homer.getJobs()) {
+			System.out.println("\t" + j);
+		}
+		
+		System.out.println(snacko);
+		for (Employee e : snacko.getEmployees()) {
+			System.out.println("\t" + e);
+		}
+		
+		//homer = empSvc.deleteEmployee(homer.getId());
+		empSvc.shutdown();
+	}
 }

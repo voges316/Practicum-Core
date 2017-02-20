@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Query;
 
 import com.airlink.model.domain.Employee;
+import com.airlink.model.domain.Job;
 import com.airlink.model.services.AbstractDBSvc;
 
 public class EmployeeSvcJPAImpl extends AbstractDBSvc implements IEmployeeSvc {
@@ -44,6 +45,18 @@ public class EmployeeSvcJPAImpl extends AbstractDBSvc implements IEmployeeSvc {
 		if (e == null) return null;
 		
 		em.getTransaction().begin();
+		if (e.getJobs().size() > 0) {
+			// Delete from the jobs
+			for (Job j : e.getJobs()) {
+				j.getEmployees().remove(e);
+			}
+			// Delete employee's job list
+			e.getJobs().clear();
+			// Should persist job changes
+			em.merge(e);
+		}
+		
+		// Delete the job
 		em.remove(e);
 		em.getTransaction().commit();
 		

@@ -15,6 +15,8 @@ public interface IJobSvc {
 	
 	public Job deleteJob(int id);
 	
+	public Job deleteJob(Job job);
+	
 	public List<Job> getJobs();
 	
 	public Job addEmployee(Job j, Employee e);
