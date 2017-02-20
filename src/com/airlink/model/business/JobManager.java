@@ -1,0 +1,52 @@
+package com.airlink.model.business;
+
+import java.util.List;
+
+import com.airlink.model.domain.Job;
+import com.airlink.model.services.jobs.IJobSvc;
+import com.airlink.model.services.jobs.JobSvcJavaImpl;
+
+public class JobManager extends ManagerSupertype {
+	
+	private static IJobSvc jobSvc = new JobSvcJavaImpl();
+	private static JobManager instance;
+	
+	private JobManager() {}
+	
+	public static synchronized JobManager getInstance() {
+		if (instance == null) {
+			instance = new JobManager();
+			
+			// TODO remove. for dummy testing
+			jobSvc.createJob(new Job("Training", 5));
+			jobSvc.createJob(new Job("Scheduling", 4));
+			jobSvc.createJob(new Job("Staff", 2));
+		}
+		return instance;
+	}
+	
+	public Job registerJob(Job job) {
+		Job result = jobSvc.createJob(job);
+		return result;
+	}
+	
+	public Job retrieveJob(int id) {
+		Job result = jobSvc.getJob(id);
+		return result;
+	}
+	
+	public Job updateJob(Job job) {
+		Job result = jobSvc.updateJob(job);
+		return result;
+	}
+	
+	public Job deleteJob(int id) {
+		Job result = jobSvc.deleteJob(id);
+		return result;
+	}
+	
+	public List<Job> getJobs() {
+		List<Job> result = jobSvc.getJobs();
+		return result;
+	}
+}
