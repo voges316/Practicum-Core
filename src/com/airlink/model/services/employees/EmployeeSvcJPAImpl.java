@@ -37,10 +37,10 @@ public class EmployeeSvcJPAImpl extends AbstractDBSvc implements IEmployeeSvc {
 		System.out.println("updateEmployee()");
 		return employee;
 	}
-
+	
 	@Override
-	public Employee deleteEmployee(int id) {
-		Employee e = em.find(Employee.class, id);
+	public Employee deleteEmployee(Employee employee) {
+		Employee e = em.find(Employee.class, employee.getId());
 		
 		if (e == null) return null;
 		

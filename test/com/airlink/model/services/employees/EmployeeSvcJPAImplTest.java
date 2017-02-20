@@ -37,7 +37,7 @@ public class EmployeeSvcJPAImplTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Employee e = svc.deleteEmployee(homer.getId());
+		Employee e = svc.deleteEmployee(homer);
 		if (e != null) homer = e;
 	}
 
@@ -67,7 +67,7 @@ public class EmployeeSvcJPAImplTest {
 
 	@Test
 	public void testDeleteEmployee() {
-		Employee e = svc.deleteEmployee(homer.getId());
+		Employee e = svc.deleteEmployee(homer);
 		
 		Employee f = svc.getEmployee(e.getId());
 		assertTrue("Employee should have been removed from db", f == null);

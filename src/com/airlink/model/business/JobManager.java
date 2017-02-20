@@ -4,11 +4,11 @@ import java.util.List;
 
 import com.airlink.model.domain.Job;
 import com.airlink.model.services.jobs.IJobSvc;
-import com.airlink.model.services.jobs.JobSvcJavaImpl;
+import com.airlink.model.services.jobs.JobSvcJPAImpl;
 
 public class JobManager extends ManagerSupertype {
 	
-	private static IJobSvc jobSvc = new JobSvcJavaImpl();
+	private static IJobSvc jobSvc = new JobSvcJPAImpl();
 	private static JobManager instance;
 	
 	private JobManager() {}
@@ -40,8 +40,8 @@ public class JobManager extends ManagerSupertype {
 		return result;
 	}
 	
-	public Job deleteJob(int id) {
-		Job result = jobSvc.deleteJob(id);
+	public Job deleteJob(Job job) {
+		Job result = jobSvc.deleteJob(job);
 		return result;
 	}
 	

@@ -12,7 +12,7 @@ public interface IEmployeeSvc {
 	
 	public Employee updateEmployee(Employee employee);
 	
-	public Employee deleteEmployee(int id);
+	public Employee deleteEmployee(Employee employee);
 	
 	public List<Employee> getEmployees();
 }

@@ -39,7 +39,7 @@ public class JobSvcJPAImplTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Job j = svc.deleteJob(snacko.getId());
+		Job j = svc.deleteJob(snacko);
 		if (j != null) snacko = j;
 	}
 
@@ -71,7 +71,7 @@ public class JobSvcJPAImplTest {
 
 	@Test
 	public void testDeleteJob() {
-		Job j = svc.deleteJob(snacko.getId());
+		Job j = svc.deleteJob(snacko);
 		
 		Job k = svc.getJob(j.getId());
 		assertTrue("Job should have been removed from db", k == null);
@@ -102,7 +102,7 @@ public class JobSvcJPAImplTest {
 		assertTrue("homer should be assigned to snacko job", homer.getJobs().size() == 1);
 		assertTrue("snacko should have homer as an employee", snacko.getEmployees().size() == 1);
 		
-		empSvc.deleteEmployee(homer.getId());
+		empSvc.deleteEmployee(homer);
 		empSvc.shutdown();
 	}
 
@@ -125,7 +125,7 @@ public class JobSvcJPAImplTest {
 				homer.getJobs().size() == 0);
 		assertTrue("snacko shouldn't have any employees", snacko.getEmployees().size() == 0);
 		
-		empSvc.deleteEmployee(homer.getId());
+		empSvc.deleteEmployee(homer);
 		empSvc.shutdown();
 	}
 
@@ -153,7 +153,7 @@ public class JobSvcJPAImplTest {
 		assertTrue("snacko should have homer as an employee", snacko.getEmployees().size() == 1);
 		
 		// Now delete the employee
-		homer = empSvc.deleteEmployee(homer.getId());
+		homer = empSvc.deleteEmployee(homer);
 		assertTrue("homer shouldn't have any jobs", 
 				homer.getJobs().size() == 0);
 		assertTrue("snacko shouldn't have any employees", snacko.getEmployees().size() == 0);
@@ -192,7 +192,7 @@ public class JobSvcJPAImplTest {
 			System.out.println("\t" + e);
 		}
 		
-		snacko = svc.deleteJob(snacko.getId());
+		snacko = svc.deleteJob(snacko);
 		homer = empSvc.getEmployee(homer.getId());
 		
 		System.out.println("===========After===========");

@@ -3,12 +3,12 @@ package com.airlink.model.business;
 import java.util.List;
 
 import com.airlink.model.domain.Employee;
-import com.airlink.model.services.employees.EmployeeSvcJavaImpl;
+import com.airlink.model.services.employees.EmployeeSvcJPAImpl;
 import com.airlink.model.services.employees.IEmployeeSvc;
 
 public class EmployeeMgr extends ManagerSupertype {
 
-	private static IEmployeeSvc employeeSvc = new EmployeeSvcJavaImpl();
+	private static IEmployeeSvc employeeSvc = new EmployeeSvcJPAImpl();
 	private static EmployeeMgr instance;
 	
 	private EmployeeMgr() {}
@@ -43,8 +43,8 @@ public class EmployeeMgr extends ManagerSupertype {
 		return result;
 	}
 	
-	public Employee deleteEmployee(int id) {
-		Employee result = employeeSvc.deleteEmployee(id);
+	public Employee deleteEmployee(Employee employee) {
+		Employee result = employeeSvc.deleteEmployee(employee);
 		return result;
 	}
 	

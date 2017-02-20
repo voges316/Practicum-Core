@@ -38,10 +38,10 @@ public class JobSvcJPAImpl extends AbstractDBSvc implements IJobSvc {
 		System.out.println("updateJob()");
 		return job;
 	}
-
+	
 	@Override
-	public Job deleteJob(int id) {
-		Job j = em.find(Job.class, id);
+	public Job deleteJob(Job job) {
+		Job j = em.find(Job.class, job.getId());
 		
 		if (j == null) return null;
 		
@@ -61,11 +61,6 @@ public class JobSvcJPAImpl extends AbstractDBSvc implements IJobSvc {
 		
 		System.out.println("deleteJob()");
 		return j;
-	}
-	
-	@Override
-	public Job deleteJob(Job job) {
-		return deleteJob(job.getId());
 	}
 
 	@Override

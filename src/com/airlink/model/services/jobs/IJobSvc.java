@@ -13,8 +13,6 @@ public interface IJobSvc {
 	
 	public Job updateJob(Job job);
 	
-	public Job deleteJob(int id);
-	
 	public Job deleteJob(Job job);
 	
 	public List<Job> getJobs();
