@@ -138,17 +138,6 @@ public class JobSvcJPAImplTest {
 		snacko = svc.addEmployee(snacko, homer);
 		homer = empSvc.getEmployee(homer.getId());
 		
-//		System.out.println("===========Before===========");
-//		System.out.println(homer);
-//		for (Job j : homer.getJobs()) {
-//			System.out.println("\t" + j);
-//		}
-//		
-//		System.out.println(snacko);
-//		for (Employee e : snacko.getEmployees()) {
-//			System.out.println("\t" + e);
-//		}
-		
 		assertTrue("homer should be assigned to snacko job", homer.getJobs().size() == 1);
 		assertTrue("snacko should have homer as an employee", snacko.getEmployees().size() == 1);
 		
@@ -157,17 +146,6 @@ public class JobSvcJPAImplTest {
 		assertTrue("homer shouldn't have any jobs", 
 				homer.getJobs().size() == 0);
 		assertTrue("snacko shouldn't have any employees", snacko.getEmployees().size() == 0);
-		
-//		System.out.println("===========After===========");
-//		System.out.println(f);
-//		for (Job j : f.getJobs()) {
-//			System.out.println("\t" + j);
-//		}
-//		
-//		System.out.println(snacko);
-//		for (Employee e : snacko.getEmployees()) {
-//			System.out.println("\t" + e);
-//		}
 		
 		empSvc.shutdown();
 	}
@@ -205,8 +183,7 @@ public class JobSvcJPAImplTest {
 		for (Employee e : snacko.getEmployees()) {
 			System.out.println("\t" + e);
 		}
-		
-		//homer = empSvc.deleteEmployee(homer.getId());
+
 		empSvc.shutdown();
 	}
 }
