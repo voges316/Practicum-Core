@@ -16,11 +16,6 @@ public class JobManager extends ManagerSupertype {
 	public static synchronized JobManager getInstance() {
 		if (instance == null) {
 			instance = new JobManager();
-			
-			// TODO remove. for dummy testing
-			jobSvc.createJob(new Job("Training", 5));
-			jobSvc.createJob(new Job("Scheduling", 4));
-			jobSvc.createJob(new Job("Staff", 2));
 		}
 		return instance;
 	}

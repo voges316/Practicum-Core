@@ -1,5 +1,6 @@
 package com.airlink.model.services;
 
+import com.airlink.model.domain.Address;
 import com.airlink.model.domain.Employee;
 import com.airlink.model.domain.Job;
 import com.airlink.model.services.employees.EmployeeSvcJPAImpl;
@@ -43,28 +44,34 @@ public class DBJobEmployeeTester {
 		
 		// Now test deleting
 //		Employee e1 = empsvc.getEmployee(2851);
-		Job j1 = jobsvc.getJob(2901);
-		System.out.println("\tBefore:");
-		for (Employee e : j1.getEmployees()) {
-			System.out.println(j1);
-			System.out.println("\t" + e);
-		}
+//		Job j1 = jobsvc.getJob(2901);
+//		System.out.println("\tBefore:");
+//		for (Employee e : j1.getEmployees()) {
+//			System.out.println(j1);
+//			System.out.println("\t" + e);
+//		}
+//		
+//		// e1 = empsvc.deleteEmployee(e1.getId());
+//		j1 = jobsvc.deleteJob(j1);
+//		Employee e1 = empsvc.getEmployee(2851);
+//		
+//		System.out.println("\tAfter:");
+//		System.out.println(e1);
+//		for (Job j : e1.getJobs()) {
+//			System.out.println("\t" + j);
+//		}
+//		
+//		//Job j1 = jobsvc.getJob(2702);
+//		System.out.println(j1);
+//		for (Employee e : j1.getEmployees()) {
+//			System.out.println("\t" + e);
+//		}
 		
-		// e1 = empsvc.deleteEmployee(e1.getId());
-		j1 = jobsvc.deleteJob(j1);
-		Employee e1 = empsvc.getEmployee(2851);
+		Employee frodo = new Employee("Frodo", "Baggins", "frodo@shire.com", "12345");
+		Address add = new Address("505 N Shire Way", "Shire", "NE", "12345");
+		frodo.setAddress(add);
 		
-		System.out.println("\tAfter:");
-		System.out.println(e1);
-		for (Job j : e1.getJobs()) {
-			System.out.println("\t" + j);
-		}
-		
-		//Job j1 = jobsvc.getJob(2702);
-		System.out.println(j1);
-		for (Employee e : j1.getEmployees()) {
-			System.out.println("\t" + e);
-		}
+		empsvc.createEmployee(frodo);
 		
 		// finally
 		jobsvc.shutdown();

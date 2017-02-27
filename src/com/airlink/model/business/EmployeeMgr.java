@@ -16,14 +16,6 @@ public class EmployeeMgr extends ManagerSupertype {
 	public static synchronized EmployeeMgr getInstance() {
 		if (instance == null) {
 			instance = new EmployeeMgr();
-			
-			// TODO remove. for dummy testing
-			employeeSvc.createEmployee(
-					new Employee("Bart", "Simpson", "bart@gmail.com", "12345"));
-			employeeSvc.createEmployee(
-					new Employee("Lisa", "Simpson", "lisa@gmail.com", "12345"));
-			employeeSvc.createEmployee(
-					new Employee("Homer", "Simpson", "homer@duff.com", "12345"));
 		}
 		return instance;
 	}

@@ -35,7 +35,7 @@ public class Employee {
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
 	
-	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+	@OneToOne(cascade = {CascadeType.ALL}, orphanRemoval=true)
 	private Address address;
 	
 	@ManyToMany(mappedBy="employees")

@@ -19,7 +19,22 @@ public class Address {
     private String zip;
     
     public Address () {}
-    
+
+	public Address(String street, String city, String state, String zip) {
+		super();
+		this.street = street;
+		this.city = city;
+		this.state = state;
+		this.zip = zip;
+	}
+	
+	public Address(Address address) {
+		this.id = address.id;
+		this.street = address.street;
+		this.city = address.city;
+		this.state = address.state;
+		this.zip = address.zip;
+	}
 
 	public int getId() {
 		return id;

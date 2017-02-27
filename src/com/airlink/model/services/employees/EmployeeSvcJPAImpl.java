@@ -4,19 +4,24 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.airlink.model.domain.Employee;
 import com.airlink.model.domain.Job;
 import com.airlink.model.services.AbstractDBSvc;
 
 public class EmployeeSvcJPAImpl extends AbstractDBSvc implements IEmployeeSvc {
 
+	static final Logger logger = LoggerFactory.getLogger(EmployeeSvcJPAImpl.class);
+	
 	@Override
 	public Employee createEmployee(Employee employee) {
 		em.getTransaction().begin();
 		em.persist(employee);
 		em.getTransaction().commit();
 		
-		System.out.println("createEmployee()");
+		logger.info("createEmployee()");
 		return employee;
 	}
 
@@ -24,7 +29,7 @@ public class EmployeeSvcJPAImpl extends AbstractDBSvc implements IEmployeeSvc {
 	public Employee getEmployee(int id) {
 		Employee e = em.find(Employee.class, id);
 		
-		System.out.println("getEmployee()");
+		logger.info("getEmployee()");
 		return e;
 	}
 
@@ -34,7 +39,7 @@ public class EmployeeSvcJPAImpl extends AbstractDBSvc implements IEmployeeSvc {
 		em.merge(employee);
 		em.getTransaction().commit();
 		
-		System.out.println("updateEmployee()");
+		logger.info("updateEmployee()");
 		return employee;
 	}
 	
@@ -60,7 +65,7 @@ public class EmployeeSvcJPAImpl extends AbstractDBSvc implements IEmployeeSvc {
 		em.remove(e);
 		em.getTransaction().commit();
 		
-		System.out.println("deleteEmployee()");
+		logger.info("deleteEmployee()");
 		return e;
 	}
 
@@ -68,7 +73,7 @@ public class EmployeeSvcJPAImpl extends AbstractDBSvc implements IEmployeeSvc {
 	public List<Employee> getEmployees() {
 		
 		Query query = em.createQuery("SELECT e FROM Employee e");
-		System.out.println("getEmployees()");
+		logger.info("getEmployees()");
 		
 		return (List<Employee>)query.getResultList();
 	}
